@@ -1,0 +1,566 @@
+:root {
+  --emerald-bg: #014421;
+  --emerald-deep: #012e17;
+  --emerald-mid: #025c2f;
+  --emerald-accent: #6db892;
+  --emerald-accent-soft: rgba(109, 184, 146, 0.45);
+  --emerald-track: rgba(109, 184, 146, 0.22);
+  --text-on-green: #f4f7f5;
+  --text-muted: rgba(244, 247, 245, 0.58);
+  --text-faint: rgba(244, 247, 245, 0.38);
+  --border-on-green: rgba(244, 247, 245, 0.12);
+  --font-sans: 'Cormorant', 'Georgia', 'Times New Roman', serif;
+  --font-ui: 'Karla', 'Helvetica Neue', Arial, sans-serif;
+  --container: min(680px, 88vw);
+  --scroll-track-height: min(72vh, 640px);
+  --header-bg: #ffffff;
+  --header-border: rgba(1, 68, 33, 0.12);
+  --header-link: rgba(1, 68, 33, 0.55);
+  --header-link-active: #014421;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-on-green);
+  background: var(--emerald-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-shell {
+  min-height: 100svh;
+  background: var(--emerald-bg);
+}
+
+.container {
+  width: var(--container);
+  margin: 0 auto;
+}
+
+/* —— Scroll progress —— */
+.scroll-progress {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  pointer-events: none;
+}
+
+.scroll-progress-track {
+  width: 2px;
+  height: var(--scroll-track-height);
+  background: var(--emerald-track);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--emerald-accent);
+  border-radius: 999px;
+  transition: height 0.08s linear;
+}
+
+/* —— Header —— */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+}
+
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px clamp(20px, 5vw, 48px);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.logo img {
+  height: 44px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--header-link);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--header-link-active);
+}
+
+/* —— Home tagline —— */
+.home-shell {
+  position: relative;
+}
+
+.home-tagline {
+  padding: clamp(48px, 10vh, 96px) clamp(20px, 5vw, 48px) clamp(32px, 6vh, 56px);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.home-tagline-text {
+  margin: 0;
+  max-width: var(--container);
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--text-on-green);
+}
+
+/* —— Episode list —— */
+.episode-list-section {
+  padding: 0 clamp(20px, 5vw, 48px) clamp(80px, 12vh, 120px);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.episode-sort {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-on-green);
+  width: fit-content;
+  margin-left: auto;
+}
+
+.episode-sort button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.episode-sort button + button {
+  border-left: 1px solid var(--border-on-green);
+}
+
+.episode-sort button:hover {
+  color: var(--text-on-green);
+}
+
+.episode-sort button.active {
+  color: var(--text-on-green);
+  background: rgba(109, 184, 146, 0.12);
+}
+
+.episode-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.episode-row {
+  border-top: 1px solid var(--border-on-green);
+}
+
+.episode-row:last-child {
+  border-bottom: 1px solid var(--border-on-green);
+}
+
+.episode-row a {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(16px, 3vw, 28px);
+  padding: 18px 0;
+  transition: opacity 0.2s ease;
+}
+
+.episode-row a:hover {
+  opacity: 0.72;
+}
+
+.episode-row-number {
+  flex: 0 0 auto;
+  min-width: 2.5rem;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+}
+
+.episode-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.episode-row-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-on-green);
+}
+
+.episode-row-date {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* —— Episode page —— */
+.episode-page {
+  padding-top: clamp(24px, 4vh, 40px);
+}
+
+.episode-page-back {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 48px) 8px;
+}
+
+.episode-page-content {
+  max-width: var(--container);
+}
+
+.episode-page-meta {
+  margin: 0 0 12px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.episode-page-title {
+  margin: 0 0 12px;
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-on-green);
+}
+
+.episode-page-date {
+  margin: 0 0 28px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.episode-player {
+  display: block;
+  width: 100%;
+  margin-bottom: 28px;
+  border-radius: 2px;
+}
+
+audio.episode-player {
+  height: 48px;
+}
+
+video.episode-player {
+  max-height: 360px;
+  background: #000;
+}
+
+.episode-page-description {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.episode-page-unavailable {
+  margin: 0 0 28px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* —— Footer —— */
+.site-footer {
+  border-top: 1px solid var(--border-on-green);
+  padding: 32px clamp(20px, 5vw, 48px) 40px;
+}
+
+.footer-bar {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.footer-social a:hover {
+  color: var(--text-on-green);
+}
+
+.footer-social-npr {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.footer-social-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.footer-copy {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* —— Subpages —— */
+.subpage {
+  padding: clamp(32px, 6vh, 56px) clamp(20px, 5vw, 48px) clamp(64px, 10vh, 96px);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.page-header {
+  padding: clamp(32px, 6vh, 56px) clamp(20px, 5vw, 48px) 16px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.page-header--compact {
+  padding-bottom: 8px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 400;
+  color: var(--text-on-green);
+}
+
+.page-subtitle {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.page-content {
+  max-width: var(--container);
+}
+
+.page-lead {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-on-green);
+}
+
+.page-content p {
+  color: var(--text-muted);
+}
+
+.about-layout {
+  max-width: none;
+}
+
+.about-layout::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.about-photo {
+  float: left;
+  width: min(200px, 38%);
+  margin: 0 clamp(20px, 3vw, 32px) 12px 0;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.about-name {
+  margin: 0 0 0.35em;
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--text-on-green);
+}
+
+.about-intro {
+  margin-top: 0;
+}
+
+.about-full {
+  clear: both;
+}
+
+.text-link {
+  color: var(--emerald-accent);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.text-link:hover {
+  color: var(--text-on-green);
+}
+
+/* —— Blog —— */
+.blog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: var(--container);
+}
+
+.blog-list li {
+  border-top: 1px solid var(--border-on-green);
+  padding: 20px 0;
+}
+
+.blog-list li:last-child {
+  border-bottom: 1px solid var(--border-on-green);
+}
+
+.blog-list a {
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.blog-list a:hover {
+  opacity: 0.72;
+}
+
+.blog-card-date {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  margin: 0 0 8px;
+}
+
+.blog-list h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-on-green);
+}
+
+.blog-list p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+
+  .about-photo {
+    width: min(160px, 42%);
+  }
+
+  .scroll-progress {
+    right: 12px;
+  }
+
+  .scroll-progress-track {
+    height: min(56vh, 420px);
+  }
+
+  .episode-row a {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-progress {
+    display: none;
+  }
+}
