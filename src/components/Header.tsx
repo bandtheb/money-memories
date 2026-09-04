@@ -9,6 +9,7 @@ export default function Header({ route }: HeaderProps) {
   const linkRoute: Record<string, Route> = {
     Home: 'home',
     About: 'about',
+    FAQ: 'faq',
     Blog: 'blog',
     'Work With Me': 'work-with-me',
   };

@@ -16,6 +16,7 @@ export function getEpisodeNumber(episodeId: number) {
 export const navLinks = [
   { label: 'Home', href: routeHref('home') },
   { label: 'About', href: routeHref('about') },
+  { label: 'FAQ', href: routeHref('faq') },
   { label: 'Blog', href: routeHref('blog') },
   { label: 'Work With Me', href: routeHref('work-with-me') },
 ];

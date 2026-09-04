@@ -434,6 +434,37 @@ video.episode-player {
   color: var(--text-muted);
 }
 
+.faq-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vh, 40px);
+}
+
+.faq-item {
+  border-top: 1px solid var(--border-on-green);
+  padding-top: clamp(20px, 3vh, 28px);
+}
+
+.faq-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.faq-question {
+  margin: 0 0 12px;
+  font-family: var(--font-sans);
+  font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-on-green);
+}
+
+.faq-answer p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
 .about-layout {
   max-width: none;
 }

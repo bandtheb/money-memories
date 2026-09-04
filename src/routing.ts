@@ -1,4 +1,4 @@
-export type Route = 'home' | 'about' | 'blog' | 'work-with-me' | 'episode';
+export type Route = 'home' | 'about' | 'faq' | 'blog' | 'work-with-me' | 'episode';
 
 export interface ParsedRoute {
   route: Route;
@@ -18,6 +18,8 @@ export function parseRoute(hash: string): ParsedRoute {
   switch (path) {
     case 'about':
       return { route: 'about' };
+    case 'faq':
+      return { route: 'faq' };
     case 'episodes':
       return { route: 'home' };
     case 'blog':
