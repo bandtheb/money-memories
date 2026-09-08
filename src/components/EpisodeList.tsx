@@ -10,15 +10,24 @@ function formatDate(iso: string) {
   return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
-function EpisodeRow({ episode, number }: { episode: Episode; number: number }) {
+function truncate(text: string, max = 120) {
+  if (!text || text.length <= max) return text;
+  return `${text.slice(0, max).trim()}…`;
+}
+
+function EpisodeCard({ episode, number }: { episode: Episode; number: number }) {
   return (
-    <li className="episode-row">
-      <a href={episodeHref(episode.slug)}>
-        <span className="episode-row-number">{number}</span>
-        <span className="episode-row-main">
-          <span className="episode-row-title">{episode.title}</span>
-          <span className="episode-row-date">{formatDate(episode.date)}</span>
-        </span>
+    <li className="episode-card">
+      <a href={episodeHref(episode.slug)} className="episode-card-link">
+        <p className="episode-card-meta">
+          Episode {number}
+          {episode.duration ? ` · ${episode.duration}` : ''}
+        </p>
+        <h3 className="episode-card-title">{episode.title}</h3>
+        {episode.excerpt ? (
+          <p className="episode-card-excerpt">{truncate(episode.excerpt)}</p>
+        ) : null}
+        <p className="episode-card-date">{formatDate(episode.date)}</p>
       </a>
     </li>
   );
@@ -36,7 +45,7 @@ export default function EpisodeList() {
   }, []);
 
   const episodes = useMemo(() => {
-    const list = [...siteContent.episodes];
+    const list = siteContent.episodes.slice(1);
     if (sortOrder === 'oldest') {
       list.reverse();
     }
@@ -44,32 +53,35 @@ export default function EpisodeList() {
   }, [sortOrder]);
 
   return (
-    <section id="episodes" className="episode-list-section">
-      <div className="episode-sort" role="group" aria-label="Sort episodes">
-        <button
-          type="button"
-          className={sortOrder === 'newest' ? 'active' : undefined}
-          onClick={() => setSortOrder('newest')}
-        >
-          Newest first
-        </button>
-        <button
-          type="button"
-          className={sortOrder === 'oldest' ? 'active' : undefined}
-          onClick={() => setSortOrder('oldest')}
-        >
-          Oldest first
-        </button>
+    <section id="episodes" className="episode-grid-section">
+      <div className="section-heading section-heading-row">
+        <h2>All Episodes</h2>
+        <div className="episode-sort" role="group" aria-label="Sort episodes">
+          <button
+            type="button"
+            className={sortOrder === 'newest' ? 'active' : undefined}
+            onClick={() => setSortOrder('newest')}
+          >
+            Newest
+          </button>
+          <button
+            type="button"
+            className={sortOrder === 'oldest' ? 'active' : undefined}
+            onClick={() => setSortOrder('oldest')}
+          >
+            Oldest
+          </button>
+        </div>
       </div>
-      <ol className="episode-list">
+      <ul className="episode-grid">
         {episodes.map((episode) => (
-          <EpisodeRow
+          <EpisodeCard
             key={episode.id}
             episode={episode}
             number={episodeNumbers.get(episode.id) ?? 0}
           />
         ))}
-      </ol>
+      </ul>
     </section>
   );
 }

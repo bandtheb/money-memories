@@ -1,4 +1,4 @@
-import { siteContent } from '../config';
+import { navLinks, siteContent } from '../config';
 
 function InstagramIcon() {
   return (
@@ -46,7 +46,24 @@ function LinkedInIcon() {
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-bar">
+      <div className="footer-inner">
+        <div className="footer-brand">
+          <p className="footer-tagline">
+            The podcast designed to make money conversations less taboo.
+          </p>
+          <p className="footer-copy">
+            © {new Date().getFullYear()} Bear and the Bull · Money Memories
+          </p>
+        </div>
+        <nav className="footer-nav" aria-label="Footer">
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.label}>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <div className="footer-social">
           <a
             href={siteContent.site.nprUrl}
@@ -90,9 +107,6 @@ export default function Footer() {
             <LinkedInIcon />
           </a>
         </div>
-        <p className="footer-copy">
-          © {new Date().getFullYear()} Bear and the Bull · Money Memories
-        </p>
       </div>
     </footer>
   );
